@@ -10,6 +10,8 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
+    use \Znck\Eloquent\Traits\BelongsToThrough;
+
 
     /**
      * The attributes that are mass assignable.
@@ -40,4 +42,19 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function shop()
+    {
+        return $this->belongsTo(Shop::class);
+    }
+
+    public function city()
+    {
+        return $this->belongsToThrough('App\Models\City', 'App\Models\Shop');;
+    }
+
+    public function country()
+    {
+        return $this->belongsToThrough('App\Models\Country', ['App\Models\City', 'App\Models\Shop']);
+    }
 }
