@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PayOrderController;
 use App\Models\User;
 use App\Services\UserData;
 use Illuminate\Support\Facades\Artisan;
@@ -39,3 +40,5 @@ Route::get('/test', function () {
     echo Str::preFIxTestOne('haha') . '<br>';
     echo Str::preFIxTestTwo('haha') . '<br>';
 });
+
+Route::get('/pay', [PayOrderController::class, 'store1']);
